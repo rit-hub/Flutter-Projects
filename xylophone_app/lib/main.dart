@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(XylophoneApp());
 }
 
@@ -13,14 +19,18 @@ class XylophoneApp extends StatelessWidget {
 
   Expanded buildKey({Color color, int soundNumber}) {
     return Expanded(
-      child: FlatButton(
-        color: color,
-        onPressed: () {
+      child: InkWell(
+        onTap: () {
           playSound(soundNumber);
         },
+        child: Container(
+          color: color,
+        ),
       ),
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +48,7 @@ class XylophoneApp extends StatelessWidget {
               buildKey(color: Colors.teal, soundNumber: 5),
               buildKey(color: Colors.blue, soundNumber: 6),
               buildKey(color: Colors.purple, soundNumber: 7),
+              buildKey(color: Colors.pink, soundNumber: 8),
             ],
           ),
         ),
